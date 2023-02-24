@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { FaShoppingCart } from "react-icons/fa";
+import { RxCross2 } from "react-icons/rx";
 import Badge from '@mui/material/Badge';
 import { NavLink } from 'react-router-dom';
 import Menu from '@mui/material/Menu';
@@ -52,7 +53,11 @@ const Header = () => {
                         horizontal: 'left',
                     }}
                 >
-                    Your cart is empty
+                    <div className='card_details d-flex justify-content-center align-items-center' style={{ width: '24rem', padding: 10, position: 'relative' }}>
+                        <i onClick={handleClose} className='smallclose' style={{ position: 'absolute', top: 3, right: 20, fontSize: 23, cursor: 'pointer' }}><RxCross2 /></i>
+                        <p> Your cart is empty</p>
+                        <img src="./cart.gif" alt="" className='emptycart_img' style={{ width: '5rem', padding: 10 }} />
+                    </div>
                 </Menu>
             </Navbar>
         </div>
