@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Card } from 'react-bootstrap';
+import './style.css'
 
 const Cards = () => {
     const [data, setData] = useState([])
-
+    console.log(data)
     useEffect(() => {
         fetch('/CardData.json')
             .then(res => res.json())
@@ -20,15 +21,18 @@ const Cards = () => {
 
                         return (
                             <>
-                                <Card style={{ width: '22rem', border: "none" }} className="mx-2 mt-4 card_style">
-                                    <Card.Img variant="top" src={element.imgdata} style={{ height: '16rem' }} />
+                                <Card
+                                    key={element.id}
+                                    style={{ width: '22rem', border: "none" }} className="mx-2 mt-4 card_style">
+                                    <Card.Img variant="top" src={element.imgdata} style={{ height: '16rem' }} className='mt-3' />
                                     <Card.Body>
-                                        <Card.Title>Card Title</Card.Title>
+                                        <Card.Title>{element.rname}</Card.Title>
                                         <Card.Text>
-                                            Some quick example text to build on the card title and make up the
-                                            bulk of the card's content.
+                                            price: ৳ {element.price}
                                         </Card.Text>
-                                        <Button variant="primary">Go somewhere</Button>
+                                        <div className="button_div d-flex justify-content-center">
+                                            <Button variant="primary" className='col-lg-12'>Add to cart</Button>
+                                        </div>
                                     </Card.Body>
                                 </Card>
                             </>
