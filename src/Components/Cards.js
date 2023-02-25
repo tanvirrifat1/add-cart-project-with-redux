@@ -1,15 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Card } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { ADD } from '../Redux/actions/action';
 import './style.css'
+
 
 const Cards = () => {
     const [data, setData] = useState([])
-    console.log(data)
+
     useEffect(() => {
         fetch('/CardData.json')
             .then(res => res.json())
             .then(data => setData(data))
     }, [])
+
+    const dispatch = useDispatch()
+
+    const send = (e) => {
+        dispatch(ADD(e))
+    }
 
     return (
         <div className='container mt-3'>
@@ -31,7 +40,11 @@ const Cards = () => {
                                             price: ৳ {element.price}
                                         </Card.Text>
                                         <div className="button_div d-flex justify-content-center">
-                                            <Button variant="primary" className='col-lg-12'>Add to cart</Button>
+                                            <Button
+                                                onClick={() => send(element)}
+                                                variant="primary"
+                                                className='col-lg-12'>Add to cart
+                                            </Button>
                                         </div>
                                     </Card.Body>
                                 </Card>

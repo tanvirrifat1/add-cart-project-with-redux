@@ -6,9 +6,14 @@ import Badge from '@mui/material/Badge';
 import { NavLink } from 'react-router-dom';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import { useSelector } from 'react-redux';
+
 
 
 const Header = () => {
+
+    const getData = useSelector((state) => state.cartReducer.carts)
+    console.log(getData)
 
     const [anchorEl, setAnchorEl] = useState(null)
     const open = Boolean(anchorEl);
