@@ -7,6 +7,7 @@ import { NavLink } from 'react-router-dom';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { useSelector } from 'react-redux';
+import { AiFillDelete } from "react-icons/ai";
 
 
 
@@ -32,7 +33,7 @@ const Header = () => {
                     <Nav className="me-auto">
                         <NavLink className='text-decoration-none text-white' to='/'>Home</NavLink>
                     </Nav>
-                    <Badge className='m-2' badgeContent={4} color="primary"
+                    <Badge className='m-2' badgeContent={getData.length} color="primary"
                         id="demo-positioned-button"
                         aria-controls={open ? 'demo-positioned-menu' : undefined}
                         aria-haspopup="true"
@@ -58,11 +59,51 @@ const Header = () => {
                         horizontal: 'left',
                     }}
                 >
-                    <div className='card_details d-flex justify-content-center align-items-center' style={{ width: '24rem', padding: 10, position: 'relative' }}>
-                        <i onClick={handleClose} className='smallclose' style={{ position: 'absolute', top: 3, right: 20, fontSize: 23, cursor: 'pointer' }}><RxCross2 /></i>
-                        <p> Your cart is empty</p>
-                        <img src="./cart.gif" alt="" className='emptycart_img' style={{ width: '5rem', padding: 10 }} />
-                    </div>
+
+                    {
+                        getData.length ?
+                            <div style={{ width: "26rem", padding: '20px' }}>
+                                <table >
+                                    <thead>
+                                        <tr>
+                                            <th>Photo</th>
+                                            <th>Restaurant Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {
+                                            getData && getData.map((e) => {
+                                                return (
+                                                    <div>
+                                                        <tr className='d-flex justify-between'>
+                                                            <td>
+                                                                <img src={e.imgdata} style={{ width: '7rem', height: '8rem' }} alt="" />
+                                                            </td>
+                                                            <td style={{ marginLeft: '50px' }}>
+                                                                <p>{e.rname}</p>
+                                                                <p>Price: ৳{e.price}</p>
+                                                                <p>Quantity: {e.qnty}</p>
+                                                                <p style={{ color: "red", fontSize: 20, cursor: "pointer" }} >
+                                                                    <i ><AiFillDelete /></i>
+                                                                </p>
+
+                                                            </td>
+                                                        </tr>
+                                                    </div>
+                                                )
+                                            })
+                                        }
+                                        <p className='text-center'>Total :৳ price</p>
+                                    </tbody>
+                                </table>
+                            </div>
+                            :
+                            <div className='card_details d-flex justify-content-center align-items-center' style={{ width: '24rem', padding: 10, position: 'relative' }}>
+                                <i onClick={handleClose} className='smallclose' style={{ position: 'absolute', top: 3, right: 20, fontSize: 23, cursor: 'pointer' }}><RxCross2 /></i>
+                                <p> Your cart is empty</p>
+                                <img src="./cart.gif" alt="" className='emptycart_img' style={{ width: '5rem', padding: 10 }} />
+                            </div>
+                    }
                 </Menu>
             </Navbar>
         </div>
